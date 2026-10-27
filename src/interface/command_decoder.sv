@@ -26,7 +26,7 @@
 module command_decoder #(
     parameter int         N       = 4,
     parameter int         K       = 4,
-    parameter logic [7:0] CHIP_ID = 8'hB4,
+    parameter logic [7:0] CHIP_ID = 8'hA8,
     // derived widths; leave at their defaults
     parameter int         AW      = $clog2(2 * N * K),   // operand byte address
     parameter int         IW      = $clog2(N * N)        // C element index
