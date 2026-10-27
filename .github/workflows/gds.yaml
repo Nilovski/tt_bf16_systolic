@@ -20,6 +20,13 @@ jobs:
         with:
           pdk: sky130A
 
+      - name: Report build metrics
+        if: always() && steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          python3 scripts/ci_summary.py build runs/wokwi
+          python3 scripts/ci_summary.py hashes $(git ls-files 'src/*.sv' 'src/**/*.sv' src/config.json info.yaml)
+
       - name: Report GDS failure
         if: always() && steps.build.outcome != 'success'
         shell: bash
@@ -65,6 +72,11 @@ jobs:
 
       - name: GL test
         uses: TinyTapeout/tt-gds-action/gl_test@ttsky26d
+
+      - name: Report gate-level results
+        if: always()
+        shell: bash
+        run: python3 scripts/ci_summary.py tests test/results.xml "gate-level tests"
 
   viewer:
     needs: gds
