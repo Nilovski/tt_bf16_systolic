@@ -11,6 +11,7 @@ host protocol. The host tiles matrix products of any size onto the array.
 - Tiles: 6x2
 - Chip ID: `0xA8`
 - Protocol, pinout and test procedure: [docs/info.md](docs/info.md)
+- Test results, build metrics and how to reproduce them: [docs/VALIDATION.md](docs/VALIDATION.md)
 
 ## Architecture
 
