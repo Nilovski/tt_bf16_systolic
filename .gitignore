@@ -15,3 +15,5 @@ test/mac/sim_build
 test/mac/results.xml
 test/mac/__pycache__/
 __pycache__/
+test/report/out/
+test/report/__pycache__/

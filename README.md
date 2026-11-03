@@ -12,6 +12,7 @@ host protocol. The host tiles matrix products of any size onto the array.
 - Chip ID: `0xA8`
 - Protocol, pinout and test procedure: [docs/info.md](docs/info.md)
 - Test results, build metrics and how to reproduce them: [docs/VALIDATION.md](docs/VALIDATION.md)
+- Every test case with its inputs, outputs and the calculation logic behind the expected values: [docs/TEST_REPORT.md](docs/TEST_REPORT.md)
 
 ## Architecture
 
@@ -42,8 +43,9 @@ src/        RTL (interface/, prep/, compute/, control/, output/)
 test/       cocotb full-chip tests (test.py), host protocol + tiling (gemm_protocol.py),
             BF16 reference model (bf16_model.py)
 test/mac/   standalone test of bf16_mac_seq against the model
+test/report/ traced runs of both suites -> docs/TEST_REPORT.md, docs/test_vectors/
 host/       demo-board runner (MicroPython + microcotb)
-docs/       datasheet (info.md)
+docs/       datasheet (info.md), validation record, test report
 ```
 
 ## Running the tests
@@ -59,6 +61,13 @@ ones, random products, accumulate, rerun without reload, element reads,
 NaN/inf/overflow/subnormal handling, cancellation, STATUS bits, LOAD/GEMM
 while busy, `ena` low, a slow host on READ_C, and host-tiled 8x8 and
 5x9 @ 9x6 products. Gate-level simulation runs in CI after hardening.
+
+To regenerate the full test report (every input matrix, expected value and
+chip output, plus all MAC vectors as CSV):
+
+```sh
+test/report/run_report.sh    # writes docs/TEST_REPORT.md and docs/test_vectors/
+```
 
 ## Running on the demo board
 
